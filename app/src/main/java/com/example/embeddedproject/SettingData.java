@@ -17,7 +17,7 @@ public class SettingData {
         AmbientHumidity = 50;
         AmbientTemperature = 30;
         SoilHumidity = 50;
-        CheckPeriod = 10;
+        CheckPeriod = 0;
     }
 
     public void setLightStartHour(int lightStartHour) {

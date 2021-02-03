@@ -88,8 +88,8 @@ public class MainActivity extends AppCompatActivity {
         SoilHum_Bar.setProgress(100*(settingData.getSoilHumidity() - 20)/80);
         SoilHum_Text.setText(String.valueOf(settingData.getSoilHumidity()));
 
-        CheckPeriod_Bar.setProgress(100*(settingData.getCheckPeriod() - 1)/59);
-        CheckPeriod_Text.setText(String.valueOf(settingData.getCheckPeriod()));
+        CheckPeriod_Bar.setProgress(settingData.getCheckPeriod());
+        CheckPeriod_Text.setText("Fast");
 
         TurnLightsOff_Switch.setChecked(settingData.getShouldTurnLightsOff() == 1);
 
@@ -196,10 +196,21 @@ public class MainActivity extends AppCompatActivity {
         CheckPeriod_Bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                progress = progress / 50;
+                progress = progress*50;
                 float temp = progress;
-                int fin = 1 + Math.round(temp*59/100);
-                settingData.setCheckPeriod(fin);
-                CheckPeriod_Text.setText(String.valueOf(fin));
+                if (progress == 0) {
+                    settingData.setCheckPeriod(10);
+                    CheckPeriod_Text.setText("Fast");
+                } else if (progress == 50) {
+                    settingData.setCheckPeriod(100);
+                    CheckPeriod_Text.setText("Med");
+                } else {
+                    settingData.setCheckPeriod(1000);
+                    CheckPeriod_Text.setText("Slow");
+                }
+
+                CheckPeriod_Bar.setProgress(progress);
             }
 
             @Override
