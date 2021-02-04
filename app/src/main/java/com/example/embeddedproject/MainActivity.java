@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -23,6 +24,8 @@ import java.util.concurrent.Executors;
 
 
 public class MainActivity extends AppCompatActivity {
+
+    EditText ServerAddr;
 
     TextView LightStartHour_Text;
     TextView LightEndHour_Text;
@@ -50,6 +53,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ServerAddr = findViewById(R.id.EditText_addr);
+        ServerAddr.setText("192.168.1.2");
 
         LightStartHour_Text = findViewById(R.id.textView16);
         LightEndHour_Text = findViewById(R.id.textView18);
@@ -247,7 +253,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void sendDataToServer(){
 
-        String url = setUrlBasedOnData("http://192.168.1.2:8000/Data/ChangeData");
+        String url = setUrlBasedOnData("http://" + ServerAddr.getText() + "/Data/ChangeData");
         System.out.println(url);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
