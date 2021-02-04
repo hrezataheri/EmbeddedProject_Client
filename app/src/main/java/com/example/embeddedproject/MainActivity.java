@@ -253,7 +253,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void sendDataToServer(){
 
-        String url = setUrlBasedOnData("http://" + ServerAddr.getText() + "/Data/ChangeData");
+        String url = setUrlBasedOnData("http://" + ServerAddr.getText() + ":8000/Data/ChangeData");
         System.out.println(url);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
@@ -275,13 +275,13 @@ public class MainActivity extends AppCompatActivity {
 
     private String setUrlBasedOnData(String mainAddress){
 
-        String str1 = "turn_off_led_if_light="+String.valueOf(settingData.getShouldTurnLightsOff());
-        String str2 = "light_start_hour="+String.valueOf(settingData.getLightStartHour());
-        String str3 = "light_end_hour="+String.valueOf(settingData.getLightEndHour());
-        String str4 = "ambient_temp="+String.valueOf(settingData.getAmbientTemperature());
-        String str5 = "ambient_humidity="+String.valueOf(settingData.getAmbientHumidity());
-        String str6 = "soil_humidity="+String.valueOf(settingData.getSoilHumidity());
-        String str7 = "check_period="+String.valueOf(settingData.getCheckPeriod());
+        String str1 = "turn_off_led_if_light="+ settingData.getShouldTurnLightsOff();
+        String str2 = "light_start_hour="+ settingData.getLightStartHour();
+        String str3 = "light_end_hour="+ settingData.getLightEndHour();
+        String str4 = "ambient_temp="+ settingData.getAmbientTemperature();
+        String str5 = "ambient_humidity="+ settingData.getAmbientHumidity();
+        String str6 = "soil_humidity="+ settingData.getSoilHumidity();
+        String str7 = "check_period="+ settingData.getCheckPeriod();
         return mainAddress+"?"+str1+"&"+str2+"&"+str3+"&"+str4+"&"+str5+"&"+str6+"&"+str7;
      }
 }
